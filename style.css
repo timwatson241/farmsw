@@ -114,7 +114,7 @@ body {
   flex: 1; /* Each child will take up equal space */
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 10px;
   border-radius: 10px;
   background-color: #f2f2f2;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
@@ -125,7 +125,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%; /* Ensure the buttons fill the container */
-  margin-top: 10px; /* Space between the date input and the buttons */
+  margin-top: 0px; /* Space between the date input and the buttons */
 }
 
 .date-selector-container button {
@@ -139,6 +139,7 @@ body {
 .date-selector-container input[type="date"] {
   width: 100%;
   margin-bottom: 10px; /* Space between the input and the buttons */
+  margin-top: 5px;
 }
 
 #inputForm {
