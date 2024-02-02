@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const appPresentDayDisplay = document.getElementById("appPresentDayDisplay");
   const goButton = document.getElementById("goButton"); // Get the Go button
 
+  let additionsLog = [];
+  let removalsLog = [];
+
   // Initialize the view date to today's date
   const today = new Date();
   today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
@@ -102,6 +105,9 @@ document.addEventListener("DOMContentLoaded", () => {
       raftElement.innerHTML = `<div>${raft.plantType}</div><div class="raft-date">${raft.transferDate}</div>`;
       levelContainer.appendChild(raftElement);
     });
+
+    // After updating the view
+    updateTablesForDate(date); // Populate tables for the updated view date
   }
 
   // Call updateView initially to set up the initial view
@@ -161,8 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const inputForm = document.getElementById("inputForm");
 
   // Initialize logs for additions and removals
-  const additionsLog = [];
-  const removalsLog = [];
 
   inputForm.addEventListener("submit", function (event) {
     event.preventDefault(); // Prevent the default form submission behavior
@@ -225,5 +229,33 @@ document.addEventListener("DOMContentLoaded", () => {
     removalsLog.push({ date, plantType, numberOfRafts, levelNumber });
     // Log the current state of removalsLog to the console
     console.log("Removals Log:", removalsLog);
+  }
+
+  // Function to clear and populate tables with log data for the selected view date
+  function updateTablesForDate(viewDate) {
+    // Clear existing table data
+    document.getElementById("addedTable").querySelector("tbody").innerHTML = "";
+    document.getElementById("removedTable").querySelector("tbody").innerHTML =
+      "";
+
+    // Filter and add log entries to the "Added" table
+    additionsLog.forEach((log) => {
+      if (log.date === viewDate) {
+        const row = `<tr><td>${log.date}</td><td>${log.plantType}</td><td>${log.numberOfRafts}</td><td>${log.levelNumber}</td></tr>`;
+        document
+          .getElementById("addedTable")
+          .querySelector("tbody").innerHTML += row;
+      }
+    });
+
+    // Filter and add log entries to the "Removed" table
+    removalsLog.forEach((log) => {
+      if (log.date === viewDate) {
+        const row = `<tr><td>${log.date}</td><td>${log.plantType}</td><td>${log.numberOfRafts}</td><td>${log.levelNumber}</td></tr>`;
+        document
+          .getElementById("removedTable")
+          .querySelector("tbody").innerHTML += row;
+      }
+    });
   }
 });
