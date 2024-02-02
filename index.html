@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertical Farming App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="appPresentDayTitle">App Present Day: <span id="appPresentDayDisplay"></span></div>
+        <section class="form-section">
+            <div class="form-wrapper">
+                <div class="form-and-date-container">
+                    <div class="date-selector-container">
+                        <label for="dateInput">View Date:</label>
+                        <input type="date" id="dateInput" name="date">
+                        <div class="date-buttons-container">
+                            <button id="decrementDate">Previous Day</button>
+                            <button id="incrementDate">Next Day</button>
+                        </div>
+                    </div>
+                    <div class="form-container">
+                        <form id="inputForm">
+                            <label for="plantType">Plant Type:</label>
+                            <select id="plantType" name="plantType">
+                                <option value="Rubella">Rubella</option>
+                                <option value="Greenleaf">GreenLeaf</option>
+                                <option value="Romaine">Romaine</option>
+                                <option value="Empty">Empty</option> <!-- New plant type -->
+                                <!-- Add other plant types here -->
+                            </select>
+                            <label for="rafts">Number of Rafts:</label>
+                            <input type="number" id="rafts" name="rafts" min="1" max="5">
+                            <label for="level">Level:</label>
+                            <select id="level" name="level">
+                              <option value="1">1</option>
+                            </select>
+                            <button type="submit" id="goButton">Go</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="log-section">
+            <div class="level" id="level-1">
+              <div class="level-number">1</div>
+              <div class="level-container">
+                <!-- Raft spaces for level 1 -->
+                <div class="raft-space">
+                  <div class="raft empty-raft">Empty</div>
+                </div>
+                <div class="raft-space">
+                  <div class="raft empty-raft">Empty</div>
+                </div>
+                <div class="raft-space">
+                  <div class="raft empty-raft">Empty</div>
+                </div>
+                <div class="raft-space">
+                  <div class="raft empty-raft">Empty</div>
+                </div>
+                <div class="raft-space">
+                  <div class="raft empty-raft">Empty</div>
+                </div>
+              </div>
+            </div>
+            <div class="table-container">
+              <div class="log-tables">
+                <div id="addedTableContainer">
+                  <h2>Added</h2>
+                  <div class="table-header">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Plant Type</th>
+                          <th>Number of Rafts</th>
+                          <th>Level</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="table-body">
+                    <table id="addedTable">
+                      <tbody>
+                        <!-- Log entries for added rafts will go here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div id="removedTableContainer">
+                  <h2>Removed</h2>
+                  <div class="table-header">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>Date</th>
+                          <th>Plant Type</th>
+                          <th>Number of Rafts</th>
+                          <th>Level</th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                  <div class="table-body">
+                    <table id="removedTable">
+                      <tbody>
+                        <!-- Log entries for removed rafts will go here -->
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          </div>
+        </section>
+    </div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>

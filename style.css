@@ -1,0 +1,265 @@
+body {
+  background-color: lightblue;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh; /* Change this from height to min-height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Changed this back to center */
+  width: 100%;
+  max-width: 1200px; /* You can set a max-width to prevent the container from becoming too wide on large screens */
+  margin: 0 auto; /* Center the container */
+}
+
+.level {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1px; /* Decrease this to reduce the space between levels */
+}
+
+.level-number {
+  margin-right: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.level-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%; /* Set the level container width to 100% of its parent container */
+  max-width: 1200px; /* Set a maximum width for the level container */
+  height: 100px; /* Set a specific height for the level container */
+  margin-top: 1px;
+  box-sizing: border-box;
+  flex-shrink: 0; /* Prevent the level container from shrinking */
+}
+
+.raft-space {
+  width: 19%; /* Set a specific width for the raft spaces */
+  max-width: 228px; /* Set a maximum width for the raft spaces */
+  height: 100%; /* Set the height to fill the level container */
+  border: 2px solid #666;
+  background-color: #bbb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px; /* Add padding to create a gap between the raft space and the raft */
+  flex-shrink: 0; /* Prevent the raft spaces from shrinking */
+  overflow: hidden; /* Add this line */
+  padding: 10px;
+}
+
+.raft-space:last-child {
+  margin-right: 0;
+  
+}
+
+.raft {
+  width: 100%; /* Set the width to fill the raft space */
+  height: 100%; /* Set the height to fill the raft space */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  align-items: center;
+  margin: 2px;
+  box-sizing: content-box; /* Changed this from border-box to content-box */
+}
+
+.raft.no-plant {
+  background-color: #FFFFFF; /* White for no plant */
+}
+
+.Rubella-raft {
+  background-color: #008000;
+}
+
+.Greenleaf-raft {
+  background-color: #00FF00;
+}
+
+.Romaine-raft {
+  background-color: #44dd44; /* Different shade of green for Romaine */
+}
+
+.empty-raft {
+  background-color: #FFFFFF; /* White for Empty */
+}
+
+.form-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.form-and-date-container {
+  display: flex;
+  justify-content: space-between; /* Ensures space between the date selector and form */
+  width: 100%;
+  max-width: 1200px; /* Matches the container max-width */
+  margin: 20px 0; /* Adds some vertical margin for spacing */
+}
+
+.date-selector-container,
+.form-container {
+  flex: 1; /* Each child will take up equal space */
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 0 10px; /* Add horizontal margin between the date selector and form */
+}
+
+.date-buttons-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%; /* Ensure the buttons fill the container */
+  margin-top: 10px; /* Space between the date input and the buttons */
+}
+
+.date-selector-container button {
+  flex: 1; /* Make buttons take up equal space */
+  margin: 0 5px; /* Space between buttons */
+  padding: 5px 10px; /* Adjust padding as needed */
+  cursor: pointer;
+}
+
+/* Ensure the date input takes the full width of its container for consistency */
+.date-selector-container input[type="date"] {
+  width: 100%;
+  margin-bottom: 10px; /* Space between the input and the buttons */
+}
+
+#inputForm {
+  width: 100%; /* Set a specific width for the form */
+  margin: 0 auto; /* Use auto margins to center the form */
+  text-align: center;
+}
+
+#inputForm label,
+#inputForm select,
+#inputForm input {
+  display: inline-block;
+}
+
+#inputForm label {
+  width: 40%;
+  text-align: right;
+  margin-right: 10px;
+}
+
+#inputForm select,
+#inputForm input {
+  width: 50%;
+}
+
+#inputForm label,
+#inputForm select,
+#inputForm input,
+#inputForm button {
+  margin-bottom: 10px;
+}
+
+#inputForm button {
+  background-color: darkblue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#inputForm button:hover {
+  background-color: mediumblue;
+}
+
+#inputForm button:disabled {
+  background-color: #cccccc; /* Light grey background */
+  color: #666666; /* Darker grey text */
+  cursor: not-allowed; /* Change cursor to indicate the button is not clickable */
+}
+
+.log-container {
+  width: 50%;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin-top: 50px;
+  max-height: 300px;
+  overflow-y: auto; /* Add a scrollbar when the content exceeds the container's height */
+}
+
+.log-tables {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px; /* Add a top margin to create space above the log tables */
+}
+
+#addedTableContainer,
+#removedTableContainer {
+  width: 45%; /* Set a specific width for the table containers */
+  height: auto; /* Change this from a specific height to auto */
+  overflow-y: auto; /* Add a scrollbar when the content exceeds the container's height */
+  background-color: #f2f2f2; /* Set the background color to match the form container */
+  border-radius: 10px; /* Add border-radius to make edges round */
+  margin: 0 auto; /* Center the tables */
+  flex-shrink: 0; /* Prevent the table containers from shrinking */
+}
+
+.table-header {
+  padding-bottom: 1px; /* Add a small bottom padding to separate the header from the body */
+}
+
+.table-body {
+  height: 200px; /* Set a specific height for the table body */
+  overflow-y: auto; /* Add a scrollbar when the content exceeds the table body's height */
+}
+
+#addedTableContainer h2,
+#removedTableContainer h2 {
+  text-align: center; /* Center the titles */
+}
+
+#addedTable,
+#removedTable {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Add this line */
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  width: 25%; /* Set a specific width for the table cells */
+  overflow: auto; /* Add a scrollbar when the content exceeds the cell's width */
+  text-align: left; /* Align the text to the left for cells */
+}
+
+th {
+  text-align: center; /* Center the text for headers */
+  background-color: darkblue;
+  color: white;
+}
+
+.table-container {
+  /* Original CSS properties */
+}
+
+.raft-date {
+  font-size: 0.8em; /* Adjust the size as needed */
+  color: #333; /* Adjust the color as needed */
+  margin-top: 4px; /* Space from the top of the raft */
+}
