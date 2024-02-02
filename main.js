@@ -279,8 +279,8 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderLogsToTable(logs, tableId) {
       const tableBody = document.getElementById(tableId).querySelector("tbody");
       logs.forEach((log) => {
+        // Note: Removed the <td> for the date
         const row = `<tr>
-          <td>${log.date}</td>
           <td>${log.plantType}</td>
           <td>${log.numberOfRafts}</td>
           <td>${log.levelNumber}</td>
