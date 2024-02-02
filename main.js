@@ -176,6 +176,20 @@ document.addEventListener("DOMContentLoaded", () => {
     const levelNumber = parseInt(document.getElementById("level").value, 10);
     const viewDate = dateInput.value;
 
+    // Calculate the total number of rafts added on the selected day
+    const raftsAddedToday = additionsLog.reduce((total, log) => {
+      if (log.date === viewDate) {
+        return total + log.numberOfRafts;
+      }
+      return total;
+    }, 0);
+
+    // Check if adding more rafts exceeds the limit of 5 for the day
+    if (raftsAddedToday + numberOfRafts > 5) {
+      alert("Cannot add more than 5 rafts in a single day to a given level.");
+      return; // Prevent further execution
+    }
+
     // Ensure the state for the view date exists
     if (!systemState[viewDate]) {
       systemState[viewDate] = {
