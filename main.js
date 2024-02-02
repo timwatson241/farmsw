@@ -238,24 +238,45 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("removedTable").querySelector("tbody").innerHTML =
       "";
 
-    // Filter and add log entries to the "Added" table
-    additionsLog.forEach((log) => {
-      if (log.date === viewDate) {
-        const row = `<tr><td>${log.date}</td><td>${log.plantType}</td><td>${log.numberOfRafts}</td><td>${log.levelNumber}</td></tr>`;
-        document
-          .getElementById("addedTable")
-          .querySelector("tbody").innerHTML += row;
-      }
-    });
+    // Helper function to aggregate logs by plant type and level
+    function aggregateLogs(logs) {
+      const aggregated = {};
+      logs.forEach((log) => {
+        const key = `${log.plantType}-${log.levelNumber}`;
+        if (!aggregated[key]) {
+          aggregated[key] = { ...log, numberOfRafts: 0 };
+        }
+        aggregated[key].numberOfRafts += log.numberOfRafts;
+      });
+      return Object.values(aggregated); // Convert the aggregated object back into an array
+    }
 
-    // Filter and add log entries to the "Removed" table
-    removalsLog.forEach((log) => {
-      if (log.date === viewDate) {
-        const row = `<tr><td>${log.date}</td><td>${log.plantType}</td><td>${log.numberOfRafts}</td><td>${log.levelNumber}</td></tr>`;
-        document
-          .getElementById("removedTable")
-          .querySelector("tbody").innerHTML += row;
-      }
-    });
+    // Filter logs by the current view date
+    const additionsForDate = additionsLog.filter(
+      (log) => log.date === viewDate
+    );
+    const removalsForDate = removalsLog.filter((log) => log.date === viewDate);
+
+    // Aggregate the filtered logs
+    const aggregatedAdditions = aggregateLogs(additionsForDate);
+    const aggregatedRemovals = aggregateLogs(removalsForDate);
+
+    // Function to render aggregated logs to a table
+    function renderLogsToTable(logs, tableId) {
+      const tableBody = document.getElementById(tableId).querySelector("tbody");
+      logs.forEach((log) => {
+        const row = `<tr>
+          <td>${log.date}</td>
+          <td>${log.plantType}</td>
+          <td>${log.numberOfRafts}</td>
+          <td>${log.levelNumber}</td>
+        </tr>`;
+        tableBody.innerHTML += row;
+      });
+    }
+
+    // Render the aggregated logs to their respective tables
+    renderLogsToTable(aggregatedAdditions, "addedTable");
+    renderLogsToTable(aggregatedRemovals, "removedTable");
   }
 });
