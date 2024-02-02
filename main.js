@@ -45,12 +45,17 @@ document.addEventListener("DOMContentLoaded", () => {
             { plantType: "Empty", transferDate: viewDate },
             { plantType: "Empty", transferDate: viewDate },
             { plantType: "Empty", transferDate: viewDate },
+            { plantType: "Empty", transferDate: viewDate },
+            { plantType: "Empty", transferDate: viewDate },
+            { plantType: "Empty", transferDate: viewDate },
+            { plantType: "Empty", transferDate: viewDate },
+            { plantType: "Empty", transferDate: viewDate },
           ],
         },
         // Initialize levels 2 through 5 with 5 empty rafts each
         ...Array.from({ length: 4 }, (_, i) => ({
           levelNumber: i + 2, // Starts from level 2 to level 5
-          rafts: Array.from({ length: 5 }, () => ({
+          rafts: Array.from({ length: 10 }, () => ({
             plantType: "Empty",
             transferDate: viewDate,
           })),
@@ -200,15 +205,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
 
     // Check if adding more rafts exceeds the limit of 5 for the day for the selected level
-    if (raftsAddedToday + numberOfRafts > 5) {
-      alert("Cannot add more than 5 rafts in a single day to a given level.");
+    if (raftsAddedToday + numberOfRafts > 10) {
+      alert("Cannot add more than 10 rafts in a single day to a given level.");
       return; // Prevent further execution
     }
 
     // Ensure the state for the view date exists
     if (!systemState[viewDate]) {
       systemState[viewDate] = {
-        levels: Array.from({ length: 5 }, (_, i) => ({
+        levels: Array.from({ length: 10 }, (_, i) => ({
           levelNumber: i + 1, // Initialize all 5 levels
           rafts: [],
         })),
@@ -231,7 +236,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Ensure only 5 rafts can exist in a level at any time, remove extras
-    while (level.rafts.length > 5) {
+    while (level.rafts.length > 10) {
       const fallenRaft = level.rafts.pop(); // Remove the rightmost raft
       systemState[viewDate].fallenOffRafts.push({
         plantType: fallenRaft.plantType,
