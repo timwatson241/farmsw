@@ -47,6 +47,14 @@ document.addEventListener("DOMContentLoaded", () => {
             { plantType: "Empty", transferDate: viewDate },
           ],
         },
+        // Initialize levels 2 through 5 with 5 empty rafts each
+        ...Array.from({ length: 4 }, (_, i) => ({
+          levelNumber: i + 2, // Starts from level 2 to level 5
+          rafts: Array.from({ length: 5 }, () => ({
+            plantType: "Empty",
+            transferDate: viewDate,
+          })),
+        })),
       ],
       fallenOffRafts: [],
     },
@@ -77,33 +85,40 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Clear the current view
-    levelContainer.innerHTML = "";
+    // Clear the current view for all levels
+    document.querySelectorAll(".level-container").forEach((container) => {
+      container.innerHTML = "";
+    });
 
-    // Populate the view with rafts for the selected date
-    stateForDate.levels[0].rafts.forEach((raft) => {
-      const raftElement = document.createElement("div");
-      raftElement.className = "raft"; // Base class for all rafts
+    // Populate the view with rafts for the selected date for each level
+    stateForDate.levels.forEach((level) => {
+      const levelContainer = document.querySelector(
+        `#level-${level.levelNumber} .level-container`
+      );
+      if (!levelContainer) return; // Skip if the level container does not exist
 
-      // Assign additional class based on plantType
-      switch (raft.plantType) {
-        case "Rubella":
-          raftElement.classList.add("Rubella-raft");
-          break;
-        case "Greenleaf":
-          raftElement.classList.add("Greenleaf-raft");
-          break;
-        case "Romaine":
-          raftElement.classList.add("Romaine-raft");
-          break;
-        case "Empty":
-          raftElement.classList.add("empty-raft");
-          break;
-        // Add more cases as needed for other plant types
-      }
-
-      raftElement.innerHTML = `<div>${raft.plantType}</div><div class="raft-date">${raft.transferDate}</div>`;
-      levelContainer.appendChild(raftElement);
+      level.rafts.forEach((raft) => {
+        const raftElement = document.createElement("div");
+        raftElement.className = "raft"; // Base class for all rafts
+        // Assign additional class based on plantType
+        switch (raft.plantType) {
+          case "Rubella":
+            raftElement.classList.add("Rubella-raft");
+            break;
+          case "Greenleaf":
+            raftElement.classList.add("Greenleaf-raft");
+            break;
+          case "Romaine":
+            raftElement.classList.add("Romaine-raft");
+            break;
+          case "Empty":
+            raftElement.classList.add("empty-raft");
+            break;
+          // Add more cases as needed for other plant types
+        }
+        raftElement.innerHTML = `<div>${raft.plantType}</div><div class="raft-date">${raft.transferDate}</div>`;
+        levelContainer.appendChild(raftElement);
+      });
     });
 
     // After updating the view
@@ -176,15 +191,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const levelNumber = parseInt(document.getElementById("level").value, 10);
     const viewDate = dateInput.value;
 
-    // Calculate the total number of rafts added on the selected day
+    // Calculate the total number of rafts added on the selected day for the selected level
     const raftsAddedToday = additionsLog.reduce((total, log) => {
-      if (log.date === viewDate) {
+      if (log.date === viewDate && log.levelNumber === levelNumber) {
         return total + log.numberOfRafts;
       }
       return total;
     }, 0);
 
-    // Check if adding more rafts exceeds the limit of 5 for the day
+    // Check if adding more rafts exceeds the limit of 5 for the day for the selected level
     if (raftsAddedToday + numberOfRafts > 5) {
       alert("Cannot add more than 5 rafts in a single day to a given level.");
       return; // Prevent further execution
@@ -193,7 +208,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ensure the state for the view date exists
     if (!systemState[viewDate]) {
       systemState[viewDate] = {
-        levels: [{ levelNumber: 1, rafts: [] }],
+        levels: Array.from({ length: 5 }, (_, i) => ({
+          levelNumber: i + 1, // Initialize all 5 levels
+          rafts: [],
+        })),
         fallenOffRafts: [],
       };
     }
