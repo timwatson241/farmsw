@@ -232,6 +232,7 @@ body {
 #addedTableContainer h2,
 #removedTableContainer h2 {
   text-align: center; /* Center the titles */
+  
 }
 
 #addedTable,
@@ -246,7 +247,7 @@ th, td {
   padding: 8px;
   width: 25%; /* Set a specific width for the table cells */
   overflow: auto; /* Add a scrollbar when the content exceeds the cell's width */
-  text-align: left; /* Align the text to the left for cells */
+  text-align: center; /* Align the text to the left for cells */
 }
 
 th {
@@ -255,13 +256,13 @@ th {
   color: white;
 }
 
-.table-container {
-  /* Original CSS properties */
-}
-
 .raft-date {
   font-size: 0.8em; /* Adjust the size as needed */
   color: #333; /* Adjust the color as needed */
   margin-top: 4px; /* Space from the top of the raft */
 }
 
+#appPresentDayTitle {
+  margin-top: 20px; /* Increase space above */
+  margin-bottom: -10px; /* Decrease space below */
+}
